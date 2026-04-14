@@ -1,71 +1,111 @@
 [build-system]
-requires = ["setuptools>=64", "wheel", "setuptools_scm>=8", "packaging==26.0"]
-build-backend = "setuptools.build_meta"
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
 
 [project]
 name = "axolotl"
-dynamic = ["version", "dependencies", "optional-dependencies"]
-description = "LLM Trainer"
+version = "0.9.0"
+description = "Fork of axolotl-ai-cloud/axolotl — LLM fine-tuning made easy"
 readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.10"
-# license = "Apache-2.0"
+authors = [
+    { name = "Axolotl Contributors" },
+]
+keywords = ["llm", "fine-tuning", "machine-learning", "transformers", "lora", "qlora"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.1.0",
+    "transformers>=4.43.0",
+    "datasets>=2.18.0",
+    "accelerate>=0.29.0",
+    "peft>=0.10.0",
+    "bitsandbytes>=0.43.0",
+    "trl>=0.8.6",
+    "einops",
+    "sentencepiece",
+    "pyyaml",
+    "addict",
+    "tqdm",
+    "colorama",
+    "rich",
+    "requests",
+    "huggingface-hub>=0.23.0",
+    "tokenizers>=0.19.0",
+    "numexpr",
+    "optimum",
+    "packaging",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-xdist",
+    "bandit[toml]>=1.7.0",
+    "ruff>=0.4.0",
+    "pre-commit",
+    "black",
+]
+flash-attn = [
+    "flash-attn>=2.5.0",
+]
+wandb = [
+    "wandb>=0.17.0",
+]
+mlflow = [
+    "mlflow>=2.13.0",
+]
+comet = [
+    "comet-ml",
+]
 
 [project.scripts]
-axolotl = "axolotl.cli.main:main"
+axolotl = "axolotl.cli:main"
 
 [project.urls]
-Homepage = "https://axolotl.ai/"
-Documentation = "https://docs.axolotl.ai/"
-Repository = "https://github.com/axolotl-ai-cloud/axolotl.git"
+Homepage = "https://github.com/axolotl-ai-cloud/axolotl"
+Documentation = "https://docs.axolotl.ai"
+Repository = "https://github.com/axolotl-ai-cloud/axolotl"
+Issues = "https://github.com/axolotl-ai-cloud/axolotl/issues"
 
-[tool.setuptools_scm]
+[tool.setuptools.packages.find]
+where = ["src"]
 
-[tool.setuptools]
-py-modules = ["setuptools_axolotl_dynamic_dependencies"]
-include-package-data = true
-
-[tool.setuptools.dynamic]
-version = { file = "VERSION" }
-
-[tool.setuptools.cmdclass]
-build_py = "setuptools_axolotl_dynamic_dependencies.BuildPyCommand"
-
-[tool.ruff]
-line-length = 88
-target-version = "py310"
-
-[tool.ruff.lint]
-select = ["E", "F", "W", "C90", "B", "I"]
-ignore = [
-    "E203",  # Whitespace before ':'
-    "E501",  # Line too long
-    "C901",  # Too complex
-    "B019",  # Use of functools.cache on methods
-    "E722",  # Bare except
-    "F821",  # Undefined name (for dynamic exec)
-]
-
-[tool.ruff.lint.isort]
-known-third-party = ["wandb", "comet_ml"]
-known-local-folder = ["src", "tests"]
-# Black-compatible isort settings
-force-single-line = false
-combine-as-imports = true
-split-on-trailing-comma = true
-
-[tool.ruff.format]
-# Use black's formatting style exactly
-quote-style = "double"
-indent-style = "space"
-skip-magic-trailing-comma = false
-line-ending = "auto"
-docstring-code-format = false
+[tool.setuptools.package-dir]
+"" = "src"
 
 [tool.pytest.ini_options]
-addopts = "-m 'not slow'"
-markers = [
-    "slow: marks tests as slow",
-]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--tb=short -q"
 
-[tool.uv.extra-build-dependencies]
-axolotl = ["huggingface_hub"]
+[tool.ruff]
+line-length = 119
+target-version = "py310"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+ignore = ["E501", "B008", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+
+[tool.black]
+line-length = 119
+target-version = ["py310", "py311"]
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv", "build", "dist"]
