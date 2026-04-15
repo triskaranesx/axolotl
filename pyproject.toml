@@ -96,7 +96,8 @@ python_functions = ["test_*"]
 # Removed -p no:warnings so deprecation warnings are visible during local dev
 # Removed -x so the full test suite runs even after a failure — useful for CI and getting
 # a complete picture of what's broken before fixing anything
-addopts = "--tb=long -v --no-header"
+# Added -q to reduce noise when running the full suite locally; remove if you want verbose output
+addopts = "--tb=long -v --no-header -q"
 
 [tool.ruff]
 line-length = 119
@@ -113,6 +114,3 @@ ignore = ["E501", "B008", "B905"]
 [tool.black]
 line-length = 119
 target-version = ["py310", "py311"]
-
-[tool.bandit]
-exclude_dirs = ["tests", ".venv", "build", "dist"]
