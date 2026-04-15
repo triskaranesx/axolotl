@@ -94,7 +94,8 @@ python_functions = ["test_*"]
 # --no-header keeps output compact; -rN suppresses the short test summary for passing tests
 # Added --tb=long locally so I get full tracebacks when debugging test failures
 # Removed -p no:warnings so deprecation warnings are visible during local dev
-addopts = "--tb=long -v --no-header"
+# Added -x so test run stops on first failure — saves time when iterating locally
+addopts = "--tb=long -v --no-header -x"
 
 [tool.ruff]
 line-length = 119
