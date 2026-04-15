@@ -106,11 +106,12 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
+# E501: line too long — handled by line-length setting above
+# B008: do not perform function calls in default argument values — too noisy for this codebase
+# B905: zip() without explicit strict= — nice but would require too many changes upstream
+# ANN: type annotations — skipping for now, may revisit later
 ignore = ["E501", "B008", "B905"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]
-
-[tool.black]
-line-length = 119
-target-version = ["py310", "py311"]
+# Tests use assert statements and may have more relaxed style requirements
+"tests/**/*.py" = ["S101"]
