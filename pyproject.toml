@@ -93,7 +93,8 @@ python_functions = ["test_*"]
 # -v added for verbose output so individual test names are visible in my terminal
 # --no-header keeps output compact; -rN suppresses the short test summary for passing tests
 # Added --tb=long locally so I get full tracebacks when debugging test failures
-addopts = "--tb=long -p no:warnings -v --no-header"
+# Removed -p no:warnings so deprecation warnings are visible during local dev
+addopts = "--tb=long -v --no-header"
 
 [tool.ruff]
 line-length = 119
