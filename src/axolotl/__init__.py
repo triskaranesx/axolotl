@@ -1,11 +1,18 @@
-"""Axolotl - Train and fine-tune large language models"""
+"""
+Axolotl - Fine-tuning library for large language models.
 
-import pkgutil
-from importlib.metadata import PackageNotFoundError, version
+This package provides tools and utilities for fine-tuning LLMs using
+various techniques including LoRA, QLoRA, full fine-tuning, and more.
+"""
 
-__path__ = pkgutil.extend_path(__path__, __name__)  # Make this a namespace package
+import importlib.metadata
+import logging
+
+logger = logging.getLogger(__name__)
 
 try:
-    __version__ = version("axolotl")
-except PackageNotFoundError:
-    __version__ = "unknown"
+    __version__ = importlib.metadata.version("axolotl")
+except importlib.metadata.PackageNotFoundError:
+    __version__ = "0.0.0-dev"
+
+__all__ = ["__version__"]
