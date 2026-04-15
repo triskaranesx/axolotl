@@ -90,7 +90,8 @@ python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
 # Show full diffs and keep warnings visible for easier debugging during development
-addopts = "--tb=short -p no:warnings"
+# -v added for verbose output so individual test names are visible in my terminal
+addopts = "--tb=short -p no:warnings -v"
 
 [tool.ruff]
 line-length = 119
