@@ -89,8 +89,8 @@ testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-# Using -p no:warnings to reduce noise during local development runs
-addopts = "--tb=short -q -p no:warnings"
+# Show full diffs and keep warnings visible for easier debugging during development
+addopts = "--tb=short -p no:warnings"
 
 [tool.ruff]
 line-length = 119
