@@ -96,8 +96,8 @@ python_functions = ["test_*"]
 # Removed -p no:warnings so deprecation warnings are visible during local dev
 # Removed -x so the full test suite runs even after a failure — useful for CI and getting
 # a complete picture of what's broken before fixing anything
-# Added -q to reduce noise when running the full suite locally; remove if you want verbose output
-addopts = "--tb=long -v --no-header -q"
+# Removed -q so I get full output per test; easier to spot failures at a glance
+addopts = "--tb=long -v --no-header"
 
 [tool.ruff]
 line-length = 119
@@ -106,12 +106,4 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]
-# E501: line too long — handled by line-length setting above
-# B008: do not perform function calls in default argument values — too noisy for this codebase
-# B905: zip() without explicit strict= — nice but would require too many changes upstream
-# ANN: type annotations — skipping for now, may revisit later
-ignore = ["E501", "B008", "B905"]
-
-[tool.ruff.lint.per-file-ignores]
-# Tests use assert statements and may have more relaxed style requirements
-"tests/**/*.py" = ["S101"]
+# E501: line too long — handled by line-length setti
