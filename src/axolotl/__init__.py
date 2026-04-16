@@ -1,8 +1,10 @@
-"""
-Axolotl - Fine-tuning library for large language models.
+"""Axolotl - Fine-tuning library for large language models.
 
 This package provides tools and utilities for fine-tuning LLMs using
 various techniques including LoRA, QLoRA, full fine-tuning, and more.
+
+Personal fork: using this for experimenting with custom datasets and
+LoRA configs on consumer hardware.
 """
 
 import importlib.metadata
