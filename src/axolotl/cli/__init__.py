@@ -61,6 +61,10 @@ def train(
     if seed is not None:
         cli_args["seed"] = seed
 
+    # Log any CLI overrides so it's easy to see what was changed at a glance
+    if cli_args:
+        LOG.info("CLI overrides applied: %s", cli_args)
+
     from axolotl.train import do_train  # pylint: disable=import-outside-toplevel
 
     do_train(config_path, cli_args=cli_args, accelerate=accelerate)
@@ -100,33 +104,4 @@ def inference(
 
     Args:
         config: Path to the YAML configuration file.
-        debug: Enable debug logging.
-        gradio: Launch a Gradio web UI for interactive inference.
-    """
-    configure_logging(log_level="DEBUG" if debug else "INFO")
-    LOG.info("axolotl %s", __version__)
-
-    config_path = Path(config)
-    if not config_path.exists():
-        LOG.error("Config file not found: %s", config)
-        sys.exit(1)
-
-    from axolotl.inference import do_inference  # pylint: disable=import-outside-toplevel
-
-    do_inference(config_path, gradio=gradio)
-
-
-def main():
-    """Main CLI entry point dispatching subcommands via python-fire."""
-    os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
-    fire.Fire(
-        {
-            "train": train,
-            "evaluate": evaluate,
-            "inference": inference,
-        }
-    )
-
-
-if __name__ == "__main__":
-    main()
+        debug: Enable debug
