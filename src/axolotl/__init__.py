@@ -5,11 +5,16 @@ various techniques including LoRA, QLoRA, full fine-tuning, and more.
 
 Personal fork: using this for experimenting with custom datasets and
 LoRA configs on consumer hardware.
+
+Note: logging level set to WARNING by default to reduce noise during
+long training runs.
 """
 
 import importlib.metadata
 import logging
 
+# Reduce default log verbosity - too noisy during training
+logging.basicConfig(level=logging.WARNING)
 logger = logging.getLogger(__name__)
 
 try:
