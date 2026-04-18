@@ -64,6 +64,8 @@ def train(
     # Log any CLI overrides so it's easy to see what was changed at a glance
     if cli_args:
         LOG.info("CLI overrides applied: %s", cli_args)
+    else:
+        LOG.debug("No CLI overrides provided, using config file values as-is")
 
     from axolotl.train import do_train  # pylint: disable=import-outside-toplevel
 
@@ -100,8 +102,3 @@ def inference(
     debug: bool = False,
     gradio: bool = False,
 ):
-    """Run inference using the provided configuration file.
-
-    Args:
-        config: Path to the YAML configuration file.
-        debug: Enable debug
