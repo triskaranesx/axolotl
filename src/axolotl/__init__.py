@@ -11,6 +11,9 @@ what's happening during training runs.
 
 TODO: try out the new multipack sampler with my dataset, see if it
 actually speeds things up on the 3090.
+
+TODO: investigate gradient checkpointing interaction with custom
+dataset collator - seeing occasional NaN losses on long sequences.
 """
 
 import importlib.metadata
