@@ -97,7 +97,8 @@ python_functions = ["test_*"]
 # Removed -x so the full test suite runs even after a failure — useful for CI and getting
 # a complete picture of what's broken before fixing anything
 # Removed -q so I get full output per test; easier to spot failures at a glance
-addopts = "--tb=long -v --no-header"
+# Added -x back for local dev — I'd rather stop on first failure and fix it immediately
+addopts = "--tb=long -v --no-header -x"
 
 [tool.ruff]
 line-length = 119
