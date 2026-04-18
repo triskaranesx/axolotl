@@ -96,9 +96,13 @@ def evaluate(
     do_evaluate(config_path)
 
 
-def inference(
-    config: str,
-    *,
-    debug: bool = False,
-    gradio: bool = False,
-):
+def main():
+    """Main entry point for the axolotl CLI."""
+    fire.Fire({
+        "train": train,
+        "evaluate": evaluate,
+    })
+
+
+if __name__ == "__main__":
+    main()
