@@ -14,6 +14,9 @@ actually speeds things up on the 3090.
 
 TODO: investigate gradient checkpointing interaction with custom
 dataset collator - seeing occasional NaN losses on long sequences.
+
+TODO: check if upgrading to latest transformers fixes the tokenizer
+warnings I keep seeing with mistral models.
 """
 
 import importlib.metadata
@@ -28,6 +31,6 @@ try:
 except importlib.metadata.PackageNotFoundError:
     __version__ = "0.0.0-dev"
 
-logger.debug("axolotl version: %s", __version__)
+logger.info("axolotl version: %s", __version__)  # changed debug -> info so version shows up on startup
 
 __all__ = ["__version__"]
